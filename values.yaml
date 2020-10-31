@@ -1,0 +1,41 @@
+replicaCount: 1
+
+image:
+  repository: bitnami/postgres-exporter
+  tag: latest  
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+prometheus:
+  enabled: true
+
+postgresExporter:
+  dataSourceUri: "postgresql://postgres_exporter:password@localhost:5432/postgres?sslmode=disable"
+  #datasourceUri -> check sslmodes you need -> there are several types possible: disable, require (default), verify-full, verify-ca, disable 
+  dataSourceUser: "Postgresql_USER"
+  dataSourcePass: "Postgresql_PASSWORD"
+  runAsUser: 1001
+  fsGroup: 1001
+
+service:
+  type: ClusterIP
+  port: 9187
+  portName: pgresexporter
+  targetPort: 9187
+
+resources:
+   limits:
+     cpu: 500m
+     memory: 256Mi
+   requests:
+     memory: 128Mi
+     cpu: 1m
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

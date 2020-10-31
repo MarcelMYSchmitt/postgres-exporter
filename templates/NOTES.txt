@@ -1,0 +1,5 @@
+# Postgres Exporter
+
+Helm Chart for deploying Postgres Exporter in Kubernetes.
+
+
